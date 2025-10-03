@@ -12,7 +12,8 @@ file_path = os.path.join(DATA_DIR, "songdata.csv")
 # Load and preprocess song data
 songs = pd.read_csv(file_path)
 songs = songs.sample(n=5000).drop('link', axis=1).reset_index(drop=True)
-songs['text'] = songs['text'].str.replace(r'\n', '')
+songs['text'] = songs['text'].str.replace(r'\n', '', regex=True)
+
 
 # TF-IDF Vectorization and Cosine Similarity Calculation
 tfidf = TfidfVectorizer(analyzer='word', stop_words='english')
