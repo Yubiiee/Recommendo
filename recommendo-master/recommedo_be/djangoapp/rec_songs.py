@@ -21,11 +21,11 @@ lyrics_matrix = tfidf.fit_transform(songs['text'])
 cosine_similarities = cosine_similarity(lyrics_matrix)
 
 # Build a dictionary of song similarities
-similarities = {}
-for i in range(len(cosine_similarities)):
-    similar_indices = cosine_similarities[i].argsort()[:-50:-1]  # Top 50 most similar songs
-    similarities[songs['song'].iloc[i]] = [
-        (cosine_similarities[i][x], songs['song'][x], songs['artist'][x]) for x in similar_indices][1:]
+similar_indices = cosine_similarities[i].argsort()[::-1][:50]  # Top 50 most similar songs
+song_similarities[songs['song'].iloc[i]] = [
+    (cosine_similarities[i][x], songs['song'][x], songs['artist'][x]) 
+    for x in similar_indices if x != i  # exclude the song itself
+]
 
 class ContentBasedRecommender:
     def __init__(self, matrix):
