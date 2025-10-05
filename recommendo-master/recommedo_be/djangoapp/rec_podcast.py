@@ -32,6 +32,8 @@ vectors = cv.fit_transform(podcasts['tags']).toarray()
 similarity = cosine_similarity(vectors)
 
 # Recommendation function
+"""Return top 5 similar podcasts using cosine similarity."""
+
 def get_podcasts(podcast_name):
     podcast_name = podcast_name.strip().lower()
 
