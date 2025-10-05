@@ -18,7 +18,7 @@ ps = PorterStemmer()
 
 # Function to preprocess and combine relevant text data into a single 'tags' column
 def preprocess_tags(row):
-    combined = f"{row['Description']} {row['Genre']} {row['Host(s)']}"
+    combined = f"{row['Description']} {row['Genre']} {row['Host(s)']}".strip()
     combined = " ".join(ps.stem(word.lower()) for word in combined.split())
     return combined
 
